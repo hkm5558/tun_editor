@@ -101,6 +101,7 @@ class ImageEmbed extends Embeddable {
       '_inline': false,
     };
   }
+
   @override
   Map<String, dynamic> toFormalJson() {
     final res = <String, dynamic>{
@@ -125,7 +126,7 @@ class ImageEmbed extends Embeddable {
     return ImageEmbed(
       name: data['name'] as String,
       source: data['source'] as String,
-      checkPath: data['checkPath'] as String,
+      checkPath: data['checkPath'] as String?,
       width: width,
       height: height,
     );
@@ -173,6 +174,7 @@ class VideoEmbed extends Embeddable {
       '_inline': false,
     };
   }
+
   @override
   Map<String, dynamic> toFormalJson() {
     return <String, dynamic>{
@@ -212,7 +214,6 @@ class VideoEmbed extends Embeddable {
 }
 
 class MentionEmbed extends Embeddable {
-
   String denotationChar;
   String id;
   String value;
@@ -239,11 +240,11 @@ class MentionEmbed extends Embeddable {
     required this.value,
     required this.prefixChar,
   }) : super('mention', {
-    'denotationChar': denotationChar,
-    'id': id,
-    'value': value,
-    'prefixChar': prefixChar,
-  });
+          'denotationChar': denotationChar,
+          'id': id,
+          'value': value,
+          'prefixChar': prefixChar,
+        });
 
   @override
   Map<String, dynamic> toFormalJson() {
@@ -266,7 +267,8 @@ class MentionEmbed extends Embeddable {
     );
   }
 
-  static MentionEmbed fromAttribute(String id, String prefixChar, String value) {
+  static MentionEmbed fromAttribute(
+      String id, String prefixChar, String value) {
     return MentionEmbed(
       denotationChar: '',
       id: id,
@@ -274,5 +276,4 @@ class MentionEmbed extends Embeddable {
       prefixChar: prefixChar,
     );
   }
-
 }
